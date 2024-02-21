@@ -28,7 +28,7 @@ func (lsh *LogHandler) Init(protocol TransportProtocol, host string, port int, c
 
 	logLevel := ErrorLevel
 	hostname, _ := os.Hostname()
-	logstash.config = applicationConfigToPointer(config, ApplicationConfig{
+	logstash.config = appConfigOrDefault(config, ApplicationConfig{
 		AppHost:     hostname,
 		AppName:     os.Args[0],
 		Version:     "",

@@ -50,14 +50,12 @@ func (ls *Logstash) Write(pid *string, record LogMessage) error {
 	if err != nil {
 		return err
 	}
-
 	req.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
 	_, err = client.Do(req)
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -70,6 +68,13 @@ func (ls *Logstash) pointerToString(value *string) string {
 
 func (ls *Logstash) stringToPointer(value string) *string {
 	return &value
+}
+
+func appConfigOrDefault(config *ApplicationConfig, defaultConfig ApplicationConfig) ApplicationConfig {
+	if config != nil {
+		return *config
+	}
+	return defaultConfig
 }
 
 func (ls *Logstash) messageToStringMap(record LogMessage) map[string]interface{} {
@@ -85,11 +90,4 @@ func (ls *Logstash) messageToStringMap(record LogMessage) map[string]interface{}
 		message["version"] = ls.config.Environment
 	}
 	return message
-}
-
-func applicationConfigToPointer(config *ApplicationConfig, defaultConfig ApplicationConfig) ApplicationConfig {
-	if config != nil {
-		return *config
-	}
-	return defaultConfig
 }

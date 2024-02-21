@@ -57,3 +57,24 @@ func TestLogstash_messageToStringMap(t *testing.T) {
 
 	require.Equal(t, expected, result)
 }
+
+func TestLogHandler_Init_Errors(t *testing.T) {
+	// given
+	handler := LogHandler{}
+
+	// when
+	err := handler.Init(HTTP, "", 0, nil)
+
+	// then
+	errmsg := "no Logstash host provided"
+
+	require.Equal(t, errmsg, err.Error())
+
+	// when
+	err = handler.Init(HTTP, "localhost", 0, nil)
+
+	// then
+	errmsg = "invalid destination port provided"
+
+	require.Equal(t, errmsg, err.Error())
+}
