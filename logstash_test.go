@@ -58,6 +58,22 @@ func TestLogstash_messageToStringMap(t *testing.T) {
 	require.Equal(t, expected, result)
 }
 
+func TestLogStash_pointerToString(t *testing.T) {
+	ls := Logstash{}
+	s1 := ls.pointerToString(nil)
+	require.Equal(t, "", s1)
+	s1 = "pointertest"
+	s2 := ls.pointerToString(&s1)
+	require.Equal(t, s1, s2)
+}
+
+func TestLogStash_stringToPointer(t *testing.T) {
+	ls := Logstash{}
+	s1 := "stringtest"
+	s2 := ls.stringToPointer(s1)
+	require.Equal(t, s1, *s2)
+}
+
 func TestLogHandler_Init_Errors(t *testing.T) {
 	// given
 	handler := LogHandler{}
