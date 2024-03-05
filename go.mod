@@ -1,4 +1,4 @@
-module github.com/Faldon/go-tologstash.git
+module github.com/Faldon/go-tologstash
 
 go 1.21.1
 
