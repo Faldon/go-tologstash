@@ -39,8 +39,8 @@ func (lsh *LogHandler) Init(protocol TransportProtocol, host string, port int, c
 
 	lsh.Logger = logstash
 	lsh.LogLevel = ErrorLevel
-	if config.LogLevel != nil {
-		lsh.LogLevel = *config.LogLevel
+	if lsh.Logger.config.LogLevel != nil {
+		lsh.LogLevel = *lsh.Logger.config.LogLevel
 	}
 	lsh.init = true
 	lsh.pid = strconv.Itoa(os.Getppid())

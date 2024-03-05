@@ -83,7 +83,6 @@ func TestLogHandler_Init_Errors(t *testing.T) {
 
 	// then
 	errmsg := "no Logstash host provided"
-
 	require.Equal(t, errmsg, err.Error())
 
 	// when
@@ -91,6 +90,13 @@ func TestLogHandler_Init_Errors(t *testing.T) {
 
 	// then
 	errmsg = "invalid destination port provided"
-
 	require.Equal(t, errmsg, err.Error())
+
+	// when
+	err = handler.Init(HTTP, "localhost", 443, nil)
+
+	// then
+	require.Equal(t, err, nil)
+	require.Equal(t, true, handler.init)
+	require.Equal(t, ErrorLevel, handler.LogLevel)
 }
